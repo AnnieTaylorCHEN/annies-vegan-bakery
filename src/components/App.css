@@ -1,0 +1,12 @@
+html, body {
+    margin: 0;
+    background-color: aliceblue;
+}
+
+a,a:link, a:visited {
+    text-decoration: none;
+}
+
+.active {
+    font-style: italic;
+}

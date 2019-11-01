@@ -1,11 +1,14 @@
 {
-  "name": "annies-vegan-cookies",
+  "name": "annies-vegan-bakery",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "gestalt": "^0.105.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
-    "react-scripts": "3.2.0"
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.2.0",
+    "strapi": "^cd s"
   },
   "scripts": {
     "start": "react-scripts start",

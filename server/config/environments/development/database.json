@@ -1,0 +1,20 @@
+{
+  "defaultConnection": "default",
+  "connections": {
+    "default": {
+      "connector": "strapi-hook-mongoose",
+      "settings": {
+        "database": "anniesveganbakery",
+        "host": "cluster0-ue1je.mongodb.net",
+        "srv": "true",
+        "port": 27017,
+        "username": "anniesveganbakery",
+        "password": "6DToCrYBdgJRHaqC"
+      },
+      "options": {
+        "authenticationDatabase": "",
+        "ssl": true
+      }
+    }
+  }
+}
