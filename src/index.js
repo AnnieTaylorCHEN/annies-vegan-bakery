@@ -9,6 +9,7 @@ import Navbar from './components/Navbar';
 import Signin from './components/Signin';
 import Signup from './components/Signup';
 import Checkout from './components/Checkout';
+import Products from './components/Products'
 
 import * as serviceWorker from './serviceWorker';
 
@@ -21,6 +22,7 @@ const Root = () => (
                 <Route component={Signin} exact path="/signin" />
                 <Route component={Signup} exact path="/signup" />
                 <Route component={Checkout} exact path="/checkout" />
+                <Route component={Products} path="/:typeId" />
             </Switch>
         </Fragment>
     </Router>

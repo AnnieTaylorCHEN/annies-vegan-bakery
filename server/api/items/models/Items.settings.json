@@ -1,12 +1,15 @@
 {
   "connection": "default",
-  "collectionName": "",
+  "collectionName": "items",
   "info": {
     "name": "items",
     "description": ""
   },
   "options": {
-    "timestamps": true
+    "timestamps": [
+      "createdAt",
+      "updatedAt"
+    ]
   },
   "attributes": {
     "name": {
@@ -22,6 +25,10 @@
       "model": "file",
       "via": "related",
       "plugin": "upload"
+    },
+    "product": {
+      "model": "product",
+      "via": "items"
     }
   }
 }
