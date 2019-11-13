@@ -7,9 +7,6 @@ import { calculatePrice, getCart, setCart} from './utils'
 const apiUrl = process.env.API_URL || 'http://localhost:1337/graphql'
 const imageUrl = process.env.API_URL || 'http://localhost:1337/'
 
-
-
-
 export default function Products({match}) {
     const query = `query {
         product (id: "${match.params.typeId}") {

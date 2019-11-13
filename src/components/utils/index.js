@@ -7,6 +7,10 @@ export const calculatePrice = items => {
     }`
 }
 
+export const calculateAmount = items => {
+    return Number(items.reduce((acc, item) => acc + item.quantity * item.price, 0).toFixed(2))
+}
+
 // cart to persist data on users' browsers
 export const setCart = (value, cartKey = CART_KEY) => {
     if (localStorage) {
