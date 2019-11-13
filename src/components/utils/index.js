@@ -1,4 +1,5 @@
 const CART_KEY = 'AVBcart'
+const TOKEN_KEY = 'AVBjwt'
 
 export const calculatePrice = items => {
     return `$${
@@ -18,4 +19,30 @@ export const getCart = (cartKey = CART_KEY) => {
         return JSON.parse(localStorage.getItem(cartKey))
     }
     return []
+}
+
+export const clearCart = (cartKey = CART_KEY) => {
+    if (localStorage) {
+        localStorage.removeItem(cartKey)
+    }
+}
+
+//auth
+export const setToken = (value, tokenkey = TOKEN_KEY ) => {
+    if (localStorage) {
+        localStorage.setItem(tokenkey, JSON.stringify(value))
+    }
+}
+
+export const getToken = (tokenkey = TOKEN_KEY) => {
+    if (localStorage && localStorage.getItem(tokenkey)) {
+        return JSON.parse(localStorage.getItem(tokenkey))
+    }
+    return null
+}
+
+export const clearToken = (tokenkey = TOKEN_KEY) => {
+    if (localStorage) {
+        localStorage.removeItem(tokenkey)
+    }
 }

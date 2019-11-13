@@ -7,45 +7,49 @@ import { calculatePrice, getCart, setCart} from './utils'
 const apiUrl = process.env.API_URL || 'http://localhost:1337/graphql'
 const imageUrl = process.env.API_URL || 'http://localhost:1337/'
 
-const query = `query {
-  product (id: "${window.location.pathname.split('/')[1]}") {
-    _id
-    name
-    items {
-      _id
-      name
-      description
-      image {
-        url
-      }
-      price
+
+
+
+export default function Products({match}) {
+    const query = `query {
+        product (id: "${match.params.typeId}") {
+            _id
+            name
+            items {
+            _id
+            name
+            description
+            image {
+                url
+            }
+            price
+            }
+        }
+    }`
+
+    const opts = {
+    method: 'POST',
+    headers: { "Content-Type": "application/json"},
+    body: JSON.stringify({query})
     }
-  }
-}`
 
-const opts = {
-  method: 'POST',
-  headers: { "Content-Type": "application/json"},
-  body: JSON.stringify({query})
-}
-
-
-export default function Products() {
     const [products, setProducts] = useState('')
     const [items, setItems] = useState([])
     const [cartItems, setCartItems] = useState(getCart())
     
     useEffect(() => {
-      fetch(apiUrl, opts)
+        let isSubscribed = true
+        fetch(apiUrl, opts)
       .then(res => res.json())
       .then(json => {
-          console.log(json.data)
-          setProducts(json.data.product.name)
-          setItems(json.data.product.items)
+          if (isSubscribed) {
+             setProducts(json.data.product.name)
+            setItems(json.data.product.items) 
+          }
         })
       .catch(error => console.error(error))
-      
-    }, [])
+      return ()=> isSubscribed = false
+    },[opts])
 
     const addToCart = item => {
         const alreadyInCart = cartItems.findIndex(cartItem => cartItem._id === item._id)
@@ -122,7 +126,7 @@ export default function Products() {
                             >
                                 <Text bold size="xl" >{item.name}</Text>
                                 <Text>{item.description}</Text>
-                                <Text bold size="xl">{item.price}</Text>
+                                <Text bold size="xl">$ {item.price}</Text>
                                 <Text bold size="xl">
                                     <Button color="blue" text="Add to cart" onClick={() => addToCart(item)}></Button>
                                 </Text>
