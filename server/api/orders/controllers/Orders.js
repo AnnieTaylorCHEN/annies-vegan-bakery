@@ -18,7 +18,7 @@ module.exports = {
         source: token
     })
     //create order in database
-    const order = await strapi.services.orders.add({
+    const order = await strapi.api.orders.services.orders.create({
         user: ctx.state.user._id, 
         address,
         amount, 
@@ -28,6 +28,6 @@ module.exports = {
     })
 
     return order
-}
+    }
 
 };

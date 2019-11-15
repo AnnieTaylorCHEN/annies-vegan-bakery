@@ -6,10 +6,11 @@ import { withRouter } from "react-router-dom"
 import ToastMessage from './ToastMessage'
 import { getCart, calculatePrice, clearCart, calculateAmount} from './utils'
 
-const apiUrl = process.env.API_URL || 'http://localhost:1337/'
+const apiUrl = process.env.API_URL || 'http://localhost:1337'
 
 
-function _CheckoutForm ({ history}) {
+function _CheckoutForm (props) {
+    console.log(props)
 
     const [formData, setFormData] = useState({
         address: '',
@@ -40,7 +41,7 @@ function _CheckoutForm ({ history}) {
         setFormData({...formData, toast: true, toastMsg})
         setTimeout(() => setFormData({...formData, toast: false, toastMsg:''},
         // if true passed to 'redirect' argument, redirect home
-         ()=> redirect && history.push('/')), 
+         ()=> redirect && props.history.push('/')), 
         5000)
     }
  
@@ -58,7 +59,7 @@ function _CheckoutForm ({ history}) {
          }
          setFormData({...formData, modal:true })
     }
-
+    
     const handleSubmitOrder = async () => {
         const amount = calculateAmount(cartItems)
         setFormData({...formData, orderProcessing: true})
@@ -69,7 +70,8 @@ function _CheckoutForm ({ history}) {
             //set orderProcessing to false set modal to false
             //clear user cart 
             //show success toast
-            const response = await this.props.stripe.createToken()
+            
+            const response = await props.stripe.createToken()
             token = response.token.id
             console.log(token)
             await axios
@@ -250,6 +252,7 @@ const ConfirmationModal = ({ orderProcessing, cartItems, closeModal, handleSubmi
         {orderProcessing && <Text align="center" italic>Submitting your order...</Text> }
     </Modal>
 )
+
 const CheckoutForm = withRouter(injectStripe(_CheckoutForm))
 
 const Checkout = () => (
