@@ -4,13 +4,13 @@ import {Elements, StripeProvider, CardElement, injectStripe} from 'react-stripe-
 import axios from 'axios'
 import { withRouter } from "react-router-dom"
 import ToastMessage from './ToastMessage'
-import { getCart, calculatePrice, clearCart, calculateAmount} from './utils'
+import { getCart, calculatePrice, clearCart, calculateAmount, getToken} from './utils'
 
 const apiUrl = process.env.API_URL || 'http://localhost:1337'
 
 
 function _CheckoutForm (props) {
-    console.log(props)
+    // console.log(props)
 
     const [formData, setFormData] = useState({
         address: '',
@@ -63,17 +63,23 @@ function _CheckoutForm (props) {
     const handleSubmitOrder = async () => {
         const amount = calculateAmount(cartItems)
         setFormData({...formData, orderProcessing: true})
+       
         let token
         try {
             //create stripe token
             //create order with strapi (request to backend)
             //set orderProcessing to false set modal to false
             //clear user cart 
-            //show success toast
-            
+            //show success toast 
+            let jwtToken = getToken()
+            // console.log(jwtToken)
             const response = await props.stripe.createToken()
             token = response.token.id
-            console.log(token)
+            // console.log(token)
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer '+ jwtToken
+              }
             await axios
             .post(`${apiUrl}/orders`, {
                 amount, 
@@ -82,7 +88,18 @@ function _CheckoutForm (props) {
                 zipcode, 
                 address,
                 token
-            })
+            }, {headers})
+            // await axios
+            // .post(`${apiUrl}/email`, {
+            //     data: {
+            //         to: confirmEmail,
+            //         from: 'hi@anniesveganbakery.com',
+            //         subject: `Order Confirmation from Annie's Vegan Bakery`,
+            //         text: 'Your order has been processed.',
+            //         html: '<h1>Expect your order to arrive in 2-3 shipping days.</h1>'
+
+            //     }
+            // }, {headers})
             setFormData({...formData, orderProcessing: false, modal: false})
             clearCart()
             showToast('Your order has been successfully submitted', true)
