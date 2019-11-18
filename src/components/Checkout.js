@@ -89,17 +89,15 @@ function _CheckoutForm (props) {
                 address,
                 token
             }, {headers})
-            // await axios
-            // .post(`${apiUrl}/email`, {
-            //     data: {
-            //         to: confirmEmail,
-            //         from: 'hi@anniesveganbakery.com',
-            //         subject: `Order Confirmation from Annie's Vegan Bakery`,
-            //         text: 'Your order has been processed.',
-            //         html: '<h1>Expect your order to arrive in 2-3 shipping days.</h1>'
-
-            //     }
-            // }, {headers})
+            await axios
+            .post(`${apiUrl}/email`, {
+                    to: confirmEmail,
+                    from: 'hi@anniesveganbakery.com',
+                    subject: `Order Confirmation from Annie's Vegan Bakery`,
+                    text: 'Your order has been processed.',
+                    html: '<h1>Expect your order to arrive in 2-3 shipping days.</h1>'
+                }
+            ,{headers})
             setFormData({...formData, orderProcessing: false, modal: false})
             clearCart()
             showToast('Your order has been successfully submitted', true)

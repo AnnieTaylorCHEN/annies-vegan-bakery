@@ -12,7 +12,7 @@ module.exports = {
     const {address, amount, productItems, zipcode, token, city} = ctx.request.body
     //create charges in stripe
     const charge = await stripe.charges.create({
-        amount: amount * 100,
+        amount: Math.floor(amount * 1000 / 10),
         currency: 'usd',
         description: `Order ${new Date(Date.now())} - User ${ctx.state.user._id}`,
         source: token
