@@ -94,7 +94,6 @@ logs
 results
 node_modules
 .node_history
-package-lock.json
 
 
 ############################
@@ -111,3 +110,5 @@ coverage
 exports
 .cache
 build
+
+package-lock.json
