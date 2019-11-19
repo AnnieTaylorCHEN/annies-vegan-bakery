@@ -27,8 +27,8 @@ function _CheckoutForm (props) {
     const [cartItems,setCartItems] = useState([])
 
     useEffect(()=> {
-        const items = getCart()
-        setCartItems(items)
+        const cartItems = getCart()
+        setCartItems(cartItems)
     }, [])
 
     const { address, zipcode, city, confirmEmail, toast, toastMsg, orderProcessing, modal } = formData
@@ -39,10 +39,9 @@ function _CheckoutForm (props) {
     
     const showToast = (toastMsg, redirect = false) => {
         setFormData({...formData, toast: true, toastMsg})
-        setTimeout(() => setFormData({...formData, toast: false, toastMsg:''},
+        setTimeout(() => setFormData({...formData, toast: false, toastMsg:''}), 5000)
         // if true passed to 'redirect' argument, redirect home
-         ()=> redirect && props.history.push('/')), 
-        5000)
+        setTimeout(() => redirect &&  props.history.push('/'), 6000)
     }
  
     const isFormEmpty = (address, zipcode, city, confirmEmail) => {
