@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import {Container, Box, Heading, Card, Image, Text, SearchField, Icon } from 'gestalt';
 import './App.css';
 
-const apiUrl = process.env.API_URL || 'http://localhost:1337/graphql'
-const imageUrl = process.env.API_URL || 'http://localhost:1337/'
+const apiUrl = process.env.API_URL || 'http://avb-server.herokuapp.com/graphql'
+const imageUrl = process.env.API_URL || 'http://avb-server.herokuapp.com'
 
 const query = `query {
            products {

@@ -4,6 +4,7 @@
  * Read the documentation () to implement custom controller functions
  */
 require('dotenv').config()
+// require('dotenv').config({ path: require('find-config')('.env') })
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
