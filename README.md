@@ -1,7 +1,7 @@
 # Annie's Vegan Bakery
 
 ## Live demo
-[Click here](https://clever-newton-964ee2.netlify.com/)
+[Click here](https://annies-vegan-bakery.netlify.com/)
 
 ## Backend
 - CMS - Strapi, an open source CMS + graphql
